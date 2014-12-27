@@ -34,7 +34,11 @@
 
       time = '[' + hours + ':' + minutes + ':' + seconds + '] ';
     }
-    p.innerHTML = (time ? time : '') + data.name + ': ' + data.message;
+    if (data.message.substr(0,4) == '/me ') {
+      p.innerHTML =  (time ? time : '') + data.name + data.message.substr(3);
+    } else {
+      p.innerHTML = (time ? time : '') + data.name + ': ' + data.message;
+    }
     chatEl.appendChild(p);
     p.scrollIntoView();
     count ++;
