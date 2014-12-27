@@ -11,6 +11,9 @@ block content
         p.posted
           | posted by&#xa0;
           a(href='/user/#{post.value.uid}')= post.value.name
+        if post.value.reply
+          p.reply in reply to:&#xa0;
+            != post.value.reply
         pre!= post.value.content
 
     .pagination

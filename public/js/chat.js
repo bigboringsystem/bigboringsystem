@@ -15,12 +15,29 @@
     }
   };
 
+  var formatTime = function (date) {
+    if (date > 9) {
+      return date;
+    }
+
+    return '0' + date;
+  };
+
   var setChatMessage = function (data) {
     var p = document.createElement('p');
+    var time;
+    if (data.timestamp) {
+      var date = new Date(data.timestamp);
+      var hours = formatTime(date.getHours());
+      var minutes = formatTime(date.getMinutes());
+      var seconds = formatTime(date.getSeconds());
+
+      time = '[' + hours + ':' + minutes + ':' + seconds + '] ';
+    }
     if (data.message.substr(0,4) == '/me ') {
-      p.innerHTML =  data.name + data.message.substr(3);
+      p.innerHTML =  (time ? time : '') + data.name + data.message.substr(3);
     } else {
-      p.innerHTML = data.name + ': ' + data.message;
+      p.innerHTML = (time ? time : '') + data.name + ': ' + data.message;
     }
     chatEl.appendChild(p);
     p.scrollIntoView();

@@ -37,6 +37,7 @@ html
           if !session
             form(method='post', action='/login')
               p Enter your number without spaces or dashes
+              p You may need to prepend with + for some numbers
               input(type='tel', name='phone', required)
               if error
                 p.error= error
