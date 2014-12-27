@@ -17,7 +17,7 @@
 
   var setChatMessage = function (data) {
     var p = document.createElement('p');
-    if (data.message.substr(0,4) == '/me ' || data.message.substr(0,4) == '/em ') {
+    if (data.message.substr(0,4) == '/me ') {
       p.innerHTML =  data.name + data.message.substr(3);
     } else {
       p.innerHTML = data.name + ': ' + data.message;
