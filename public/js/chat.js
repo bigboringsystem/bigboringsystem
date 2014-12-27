@@ -17,7 +17,11 @@
 
   var setChatMessage = function (data) {
     var p = document.createElement('p');
-    p.innerHTML = data.name + ': ' + data.message;
+    if (data.message.substr(0,4) == '/me ' || data.message.substr(0,4) == '/em ') {
+      p.innerHTML =  data.name + data.message.substr(3);
+    } else {
+      p.innerHTML = data.name + ': ' + data.message;
+    }
     chatEl.appendChild(p);
     p.scrollIntoView();
     count ++;
