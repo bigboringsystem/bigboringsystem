@@ -365,6 +365,16 @@ pre, article p, li {
   line-height: 1.4rem;
 }
 
+#user-list {
+  clear: both;
+}
+
+#user-list .links li {
+  float: left;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
 .op a:after {
   content: ' *';
 }
