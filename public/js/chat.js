@@ -112,16 +112,19 @@
         var li = document.createElement('li');
         var listItem = '<a class="matching-item">' + matchingUserName + '</a>';
         li.innerHTML = listItem;
-        li.onclick = function(e){
+        li.addEventListener('click', function(e){
           e.preventDefault();
           var matchingValue = this.childNodes[0].innerHTML;
           messageEl.value = messageEl.value.replace(/^\S+/g, matchingValue + ':');
           messageEl.selectionStart = matchingValue.length;
           messageEl.selectionEnd = matchingValue.length;
-        }
+        });
         autoCompleteList.appendChild(li);
       }
     }
+    autoCompleteList.addEventListener('mouseover', function(){
+      messageEl.blur();
+    });
   };
 
   messageEl.addEventListener("input",  autoCompleteHandler, false);
