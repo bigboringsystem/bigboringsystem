@@ -321,10 +321,9 @@ section li a {
 }
 
 #auto-complete {
-  position: absolute;
+  position: fixed;
   background: #fff;
-  bottom: 0px;
-  width: 150px;
+  bottom: 36px;
 }
 
 #auto-complete li {
