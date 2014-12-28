@@ -115,9 +115,11 @@
         li.addEventListener('click', function(e){
           e.preventDefault();
           var matchingValue = this.childNodes[0].innerHTML;
-          messageEl.value = messageEl.value.replace(/^\S+/g, matchingValue + ':');
-          messageEl.selectionStart = matchingValue.length;
-          messageEl.selectionEnd = matchingValue.length;
+          messageEl.value = messageEl.value.replace(/^\S+/g, matchingValue + ': ');
+          messageEl.selectionStart = matchingValue.length+2;
+          messageEl.selectionEnd = matchingValue.length+2;
+          autoCompleteList.innerHTML = '';
+          messageEl.focus();
         });
         autoCompleteList.appendChild(li);
       }
