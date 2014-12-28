@@ -113,7 +113,7 @@
         var listItem = '<a class="matching-item">' + matchingUserName + '</a>';
         li.innerHTML = listItem;
         li.onclick = function(e){
-          e.preventDefault;
+          e.preventDefault();
           var matchingValue = this.childNodes[0].innerHTML;
           messageEl.value = messageEl.value.replace(/^\S+/g, matchingValue + ':');
           messageEl.selectionStart = matchingValue.length;
