@@ -3,7 +3,7 @@ extend layout
 block content
   h1 community listing
 
-  ul.links
+  ul#user-list.links
     for user in users
       li(class='#{user.op ? "op" : ""}')
         a(href='/user/#{user.value.uid}')= user.value.name
