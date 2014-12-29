@@ -25,7 +25,8 @@
     "socket.io": "~1.2.1",
     "twitter-text": "~1.10.0",
     "concat-stream": "~1.4.7",
-    "moment": "~2.8.4"
+    "moment": "~2.8.4",
+    "marked": "~0.3.2"
   },
   "devDependencies": {
     "nodemon": "~1.2.1"
