@@ -36,6 +36,14 @@ block content
       article
         time
           a(href='/post/#{post.key}')= post.value.created
+        if post.value.tags.length > 0
+          p.tags tags:
+            for tag in post.value.tags
+              | &#xa0;
+              a(href='/discover?tag=#{tag}')= '#' + tag
+        if post.value.reply
+          p.reply in reply to:&#xa0;
+            != post.value.reply
         pre!= post.value.content
     .pagination
       if next && lastKey

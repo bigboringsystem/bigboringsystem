@@ -1,7 +1,10 @@
 extend layout
 
 block content
-  h1 discover
+  if tag
+    h1= 'tagged: #' + tag
+  else
+    h1 discover
 
   #posts
     for post in posts
@@ -11,6 +14,11 @@ block content
         p.posted
           | posted by&#xa0;
           a(href='/user/#{post.value.uid}')= post.value.name
+        if post.value.tags.length > 0
+          p.tags tags:
+            for tag in post.value.tags
+              | &#xa0;
+              a(href='/discover?tag=#{tag}')= '#' + tag
         if post.value.reply
           p.reply in reply to:&#xa0;
             != post.value.reply

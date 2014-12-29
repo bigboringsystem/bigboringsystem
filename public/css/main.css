@@ -244,6 +244,10 @@ section {
   margin-bottom: 10px;
 }
 
+.content article p.tags {
+  margin-bottom: 0;
+}
+
 section ul.actions {
   float: left;
   margin-bottom: 20px;
