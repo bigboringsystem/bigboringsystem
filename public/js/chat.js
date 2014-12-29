@@ -77,6 +77,7 @@
   socket.on('users', function (data) {
     var userList = document.getElementById('users');
     userList.innerHTML = '';
+    userListArray = [];
 
     for (var user in data) {
       var li = document.createElement('li');
@@ -118,7 +119,6 @@
           messageEl.value = messageEl.value.replace(/^\S+/g, matchingValue + ': ');
           messageEl.selectionStart = matchingValue.length+2;
           messageEl.selectionEnd = matchingValue.length+2;
-          autoCompleteList.innerHTML = '';
           messageEl.focus();
         });
         autoCompleteList.appendChild(li);
