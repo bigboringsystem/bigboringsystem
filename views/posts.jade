@@ -6,6 +6,8 @@ block content
   form(method='post', action='/post')
     label(for='reply') reply links to previous posts? (space delimited)
       input(type='text', name='reply')
+    label(for='tags') tags (comma delimited)
+      input(type='text' name='tags')
     label(for='content') content
       textarea(rows='10', cols='90', name='content')
     if error
@@ -18,6 +20,11 @@ block content
       article
         time
           a(href='/post/#{post.key}')= post.value.created
+        if post.value.tags.length > 0
+          p.tags tags:
+            for tag in post.value.tags
+              |&#xa0;
+              a(href='/discover?tag=#{tag}')= '#' + tag
         if post.value.reply
           p.reply in reply to:&#xa0;
             != post.value.reply

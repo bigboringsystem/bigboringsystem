@@ -10,6 +10,11 @@ block content
     a(href='/user/#{post.uid}')= post.name
   article
     time= post.created
+    if post.tags.length > 0
+      p.tags tags:
+        for tag in post.tags
+          |&#xa0;
+          a(href='/discover?tag=#{tag}')= '#' + tag
     if post.reply
       p.reply in reply to:&#xa0;
         != post.reply
