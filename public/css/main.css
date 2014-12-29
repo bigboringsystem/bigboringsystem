@@ -320,6 +320,20 @@ section li a {
   font-weight: bold;
 }
 
+#auto-complete {
+  position: fixed;
+  background: #fff;
+  bottom: 36px;
+}
+
+#auto-complete li {
+  list-style-type: none;
+}
+
+.matching-item {
+  cursor: pointer;
+}
+
 #auth {
   position: fixed;
   right: 5px;
@@ -363,6 +377,16 @@ pre, article p, li {
 
 .links li a {
   line-height: 1.4rem;
+}
+
+#user-list {
+  clear: both;
+}
+
+#user-list .links li {
+  float: left;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .op a:after {
