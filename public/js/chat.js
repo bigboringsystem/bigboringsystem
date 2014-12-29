@@ -5,6 +5,8 @@
   var count = 0;
   var getChatSessionStorage = window.sessionStorage.getItem('chat');
   var chatEl = document.getElementById('chat');
+  var title = document.title;
+  var unread = 0;
 
   var setUser = function () {
     if (httpRequest.readyState === 4) {
@@ -69,8 +71,20 @@
     message.value = '';
   };
 
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      unread = 0;
+      document.title = title;
+    }
+  });
+
   socket.on('message', function (data) {
     setChatMessage(data);
+
+    if (document.hidden) {
+      unread++;
+      document.title = '(' + unread + ') ' + title;
+    }
   });
 
   socket.on('users', function (data) {
