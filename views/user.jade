@@ -38,7 +38,7 @@ block content
           a(href='/post/#{post.key}')= post.value.created
         pre!= post.value.content
     .pagination
-      if next && lastKey
+      if hasOlder
         a(href='/user/#{uid}?last=#{lastKey}') older
 
   if op && !userOp

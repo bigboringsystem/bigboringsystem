@@ -23,7 +23,7 @@ block content
             != post.value.reply
         pre!= post.value.content
     .pagination
-      if next && lastKey
+      if hasOlder
         a(href='/posts?last=#{lastKey}') older
 
 block scripts

@@ -17,7 +17,7 @@ block content
         pre!= post.value.content
 
     .pagination
-      if next && lastKey
+      if hasOlder
         a(href='/discover?last=#{lastKey}') older
 
 block login
