@@ -56,7 +56,7 @@ var cookieHeader = function () {
 
 
 var resetDB = function (next) {
-  child.exec('rm -rf ./test/db/*', function () {
+  child.exec('rm ./test/db/*/*', function () {
     next();
   });
 };
