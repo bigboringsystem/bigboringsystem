@@ -72,7 +72,7 @@ var routes = [
   {
     method: 'GET',
     path: '/posts',
-    handler: posts.getRecent
+    handler: posts.showRecentByUser
   },
   {
     method: 'GET',
@@ -82,7 +82,7 @@ var routes = [
   {
     method: 'GET',
     path: '/discover',
-    handler: posts.getAllRecent
+    handler: posts.showRecentPosts
   },
   {
     method: 'GET',
