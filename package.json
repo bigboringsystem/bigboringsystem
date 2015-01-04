@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "gulp",
+    "dev": "gulp",
     "test": "lab",
     "lint": "eslint lib/"
   },

@@ -54,14 +54,19 @@ var cookieHeader = function () {
   return ch;
 };
 
-
 var resetDB = function (next) {
   child.exec('rm -rf ./test/db/*', function () {
     next();
   });
 };
 
-lab.test('reset db first', function (done) {
+// Initialization before any tests are run
+lab.before(function (done) {
+  resetDB(done);
+});
+
+// Cleanup after all tests are finished
+lab.after(function (done) {
   resetDB(done);
 });
 
@@ -151,7 +156,6 @@ lab.test('authenticate with an invalid PIN', function (done) {
   });
 });
 
-
 lab.test('create new post without a name', function (done) {
   var options = {
     method: 'POST',
@@ -239,7 +243,6 @@ lab.test('create new post with session and name', function (done) {
   });
 });
 
-
 var uid, post;
 lab.test('verify post on /discover', function (done) {
   var options = {
@@ -314,8 +317,4 @@ lab.test('verify post on /discover', function (done) {
     Code.expect(response.statusCode).to.equal(200);
     done();
   });
-});
-
-lab.test('cleanup', function (done) {
-  resetDB(done);
 });
