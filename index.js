@@ -291,7 +291,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 var options = {
   cookieOptions: {
-    password: nconf.get('cookie'),
+    password: (nconf.get('cookie') || "_test_"),
     isSecure: false
   }
 };
