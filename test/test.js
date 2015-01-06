@@ -287,7 +287,7 @@ lab.test('verify post on /discover', function (done) {
     var snippet = 'Ye olde goode poste';
     var article = getArticle(response.payload, snippet);
 
-    var timeRe = new RegExp('<time>.*<a href="/post/post!([^"]+)"(.*?)</time>');
+    var timeRe = new RegExp('<a href="/post/post!([^"]+)">');
     var time = article.match(timeRe)[1];
     Code.expect(time).to.match(/^[0-9]+-[0-9a-f]+$/);
     post = time;
