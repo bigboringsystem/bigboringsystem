@@ -7,7 +7,7 @@ block content
     for post in posts
       article
         a(href='/post/post!#{post.value.postid}')
-          time= post.value.created
+          time(datetime='#{post.value.created}')= post.value.created
         p.posted
           | posted by&#xa0;
           a(href='/user/#{post.value.uid}')= post.value.name

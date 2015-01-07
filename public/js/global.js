@@ -7,7 +7,7 @@
   var count = 0;
   var getChatSessionStorage = window.sessionStorage.getItem('chat');
   var chatArr = [];
-  var timeEls = document.querySelectorAll('time');
+  var timeEls = document.querySelectorAll('time[datetime]');
   var ordinal = function (number) {
       var b = number % 10,
           output = (+(number % 100 / 10) === 1) ? 'th' :
@@ -45,9 +45,8 @@
   });
 
   if (timeEls != null) {
-    [].slice.call(timeEls).forEach(function (timeEl) {
-      timeEl.setAttribute('datetime', timeEl.innerText);
-      timeEl.innerText = localDate(timeEl.innerText);
+    [].forEach.call(timeEls, function (timeEl) {
+      timeEl.innerText = localDate(timeEl.getAttribute('datetime'));
     });
   }
 })();
