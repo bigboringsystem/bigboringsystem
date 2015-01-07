@@ -4,9 +4,8 @@
 // - They are currently stored as [millseconds since the local epoch / 1000].
 // - Multiply them by 1000, and save them as an ISO string.
 
-// Note: this script must only be run if the server's
-// time zone hasn't changed since the original posts
-// were createdis still on the same tim
+// Note: this script must only be run if the server's timezone hasn't
+// changed since the original posts were created
 
 var concat = require('concat-stream');
 
@@ -18,7 +17,8 @@ getPosts(function (err, posts) {
     updatePosts(posts, function (err) {
         if (err) { throw err; }
 
-        process.exit(1);
+        console.log('Done');
+        process.exit();
     });
 });
 
