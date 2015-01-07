@@ -40,8 +40,8 @@ html
                 p Development Mode: Enter any valid phone number (no text will be sent)
               else
                 p Enter your number without spaces or dashes
-                p You may need to prepend with + for non-U.S/Canadian numbers
-              input(type='tel', name='phone', required)
+                p * including your international dialing prefix
+              input(type='tel', name='phone', required, placeholder='+17895551234', title='+1 is the international dialing prefix for U.S. and Canadian numbers', pattern="^[\\+]?\\d{10,15}$")
               if error
                 p.error= error
               input(type='hidden', name='crumb', value='#{crumb}')
