@@ -9,7 +9,6 @@
 // were createdis still on the same tim
 
 var concat = require('concat-stream');
-var moment = require('moment');
 
 var db = require('../lib/db').register('posts');
 
