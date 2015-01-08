@@ -1,4 +1,3 @@
-
 {
   "name": "bigboringsystem",
   "version": "1.0.0",
@@ -11,25 +10,30 @@
   "scripts": {
     "start": "gulp",
     "dev": "gulp",
-    "test": "lab",
-    "lint": "eslint lib/"
+    "test": "npm run lint -s && lab",
+    "lint": "npm run lint-server && npm run lint-frontend",
+    "lint-server": "eslint lib/",
+    "lint-frontend": "eslint -c .eslintrc-frontend public/js"
   },
   "dependencies": {
-    "crumb": "~4.0.0",
+    "accepts": "^1.2.2",
     "boom": "~2.6.1",
-    "hapi": "~8.0.0",
-    "yar": "~3.0.3",
-    "jade": "~1.8.1",
-    "nconf": "~0.7.1",
-    "level": "~0.18.0",
-    "uuid": "~2.0.1",
-    "joi": "~5.0.2",
-    "level-ttl": "~2.1.1",
-    "twilio": "~1.10.0",
-    "socket.io": "~1.2.1",
-    "twitter-text": "~1.10.0",
     "concat-stream": "~1.4.7",
-    "moment": "~2.8.4"
+    "crumb": "~4.0.0",
+    "csv-write-stream": "^0.3.0",
+    "hapi": "~8.0.0",
+    "hoek": "^2.11.0",
+    "jade": "~1.8.1",
+    "joi": "~5.0.2",
+    "level": "~0.18.0",
+    "level-ttl": "~2.1.1",
+    "moment": "~2.8.4",
+    "nconf": "~0.7.1",
+    "socket.io": "~1.2.1",
+    "twilio": "~1.10.0",
+    "twitter-text": "~1.10.0",
+    "uuid": "~2.0.1",
+    "yar": "~3.0.3"
   },
   "devDependencies": {
     "code": "~1.2.1",

@@ -17,11 +17,14 @@ block content
     article
       p Welcome to the Big Boring System Inc.
       p Feel free to post something you want to share with everyone, chat with the community or browse other posts.
+      p Here's our&#xa0;
+        a(href='/privacy') privacy policy
+        | .
 
       h2 Your operators for this system
       for op in ops
         p
-          a(href='/user/#{op.uid}')= op.name
+          a(href='/user/#{op.uid}')!= op.name
 
       +rules
   else
@@ -32,5 +35,9 @@ block content
       p This is a text-only online community. Feel free to browse&#xa0;
         a(href='/discover') recent posts
         | .
+      p Here's our&#xa0;
+        a(href='/privacy') privacy policy
+        | .
+
       +rules
     h2 enter your phone number to sign in

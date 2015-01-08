@@ -97,6 +97,11 @@ var routes = [
     handler: services.authenticate
   },
   {
+    method: 'GET',
+    path: '/privacy',
+    handler: services.privacy
+  },
+  {
     method: 'POST',
     path: '/authenticate',
     handler: auth.authenticate,
@@ -141,7 +146,7 @@ var routes = [
   },
   {
     method: 'GET',
-    path: '/profile/export.{ext}',
+    path: '/profile/export{ext?}',
     handler: profile.exportPosts
   },
   {
@@ -153,7 +158,8 @@ var routes = [
         payload: {
           name: Joi.string().min(2).max(30),
           websites: Joi.string().allow(''),
-          bio: Joi.string().allow('')
+          bio: Joi.string().allow(''),
+          showreplies: Joi.string().allow('')
         }
       }
     }
@@ -211,6 +217,11 @@ var routes = [
     handler: posts.del
   },
   {
+    method: 'POST',
+    path: '/reply/{key}',
+    handler: posts.delReply
+  },
+  {
     method: 'GET',
     path: '/fixnames',
     handler: utils.fixNames
@@ -266,6 +277,8 @@ server.ext('onPreResponse', function (request, reply) {
   var error = response;
   var ctx = {};
 
+  var message = error.output.payload.message;
+
   switch (error.output.statusCode) {
     case 404:
       ctx.reason = 'page not found';
@@ -280,10 +293,17 @@ server.ext('onPreResponse', function (request, reply) {
       break;
   }
 
+  if (process.env.npm_lifecycle_event === 'dev') {
+    console.log(error.stack || error);
+  }
+
   if (ctx.reason) {
+    // Use actual message if supplied
+    ctx.reason = message || ctx.reason;
     return reply.view('error', ctx);
   } else {
-    reply.redirect(request.path + '?err=' + error.output.payload.message.replace(/\s/gi, '+'));
+    ctx.reason = message.replace(/\s/gi, '+');
+    reply.redirect(request.path + '?err=' + ctx.reason);
   }
 });
 
@@ -300,7 +320,8 @@ if (process.env.NODE_ENV !== 'test') {
 var options = {
   cookieOptions: {
     password: conf.get('cookie'),
-    isSecure: false
+    isSecure: false,
+    clearInvalid: true
   }
 };
 
@@ -349,7 +370,8 @@ server.start(function (err) {
     });
 
     socket.on('message', function (data) {
-      if (socket.user && data.trim().length > 0) {
+      var messageLength = data.trim().length;
+      if (socket.user && messageLength > 0 && messageLength < 141) {
         io.emit('message', {
           name: socket.user,
           uid: socket.uid,

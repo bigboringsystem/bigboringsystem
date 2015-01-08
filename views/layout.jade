@@ -36,13 +36,17 @@ html
         block login
           if !session
             form(method='post', action='/login')
-              p Enter your number without spaces or dashes
-              p You may need to prepend with + for non-U.S/Canadian numbers
+              if (process.env.npm_lifecycle_event === 'dev')
+                p Development Mode: Enter any valid phone number (no text will be sent)
+              else
+                p Enter your number without spaces or dashes
+                p You may need to prepend with + for non-U.S/Canadian numbers
               input(type='tel', name='phone', required)
               if error
                 p.error= error
               input(type='hidden', name='crumb', value='#{crumb}')
               button(type='submit') send my PIN
+
         block footer
           .footer
             p Powered by&#xa0;

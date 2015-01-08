@@ -1,9 +1,8 @@
 {
-	"env": {
-		"node": true
-	},
-	"rules": {
-		"quotes": [2, "single"],
-		"no-unused-vars": [1]
-	}
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "quotes": [2, "single"]
+  }
 }

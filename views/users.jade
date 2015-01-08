@@ -6,4 +6,4 @@ block content
   ul.links.links-users.cf
     for user in users
       li(class='#{user.op ? "op" : ""}')
-        a(href='/user/#{user.value.uid}')= user.value.name
+        a(href='/user/#{user.value.uid}')!= user.value.name

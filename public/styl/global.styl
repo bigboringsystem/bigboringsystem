@@ -130,6 +130,11 @@ input, textarea {
   width: 100%;
 }
 
+input[type=checkbox] {
+  display: inline;
+  width: auto;
+}
+
 form {
   max-width: 408px;
   margin-bottom: 20px;
@@ -154,7 +159,7 @@ form {
 }
 
 textarea {
-  resize: none;
+  resize: vertical;
 }
 
 /*--------------------------------------------------------------------
@@ -178,8 +183,7 @@ body .error {
 }
 
 body.error a {
-  color: #eee;
-  border-bottom: 1px dashed #ccc;
+  color: #000;
 }
 
 .error .back {
@@ -393,6 +397,11 @@ article .posted {
   text-overflow: ellipsis;
 }
 
+.reply-to-post {
+  margin: 10px 0;
+  padding: 10px 0;
+}
+
 /*--------------------------------------------------------------------
 *
 *  Ops
@@ -426,6 +435,25 @@ article .posted {
   font-size: 1.3rem;
 }
 
+.moderate {
+  display: inline;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.moderate button {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  height: auto;
+  display: inline;
+  background: none;
+  color: red;
+  font-size: inherit;
+}
+
 .pagination {
   border-top: 1px solid #eee;
   margin: 30px 0;
@@ -435,6 +463,7 @@ article .posted {
 .content article p.reply {
   font-style: italic;
   margin-bottom: 0;
+  margin-top: 15px;
 }
 
 .delete-account {

@@ -8,20 +8,26 @@ block content
   form(method='post', action='/profile')
     if error
       p.error= error
-    label(for='name') name*
+    label name*
       input(type='text', name='name', value='#{user && user.name ? user.name : ""}', required)
-    label(for='websites') websites (space delimited)
+    label websites (space delimited)
       input(type='text', name='websites', value='#{user && user.websites ? user.websites : ""}')
-    label(for='bio') bio
+    label bio
       textarea(rows='5', cols='50', name='bio')= (user && user.bio ? user.bio : "")
+    label
+      if user && user.showreplies
+        input(type='checkbox', name='showreplies', checked)
+      else
+        input(type='checkbox', name='showreplies')
+      = 'show replies to posts by default'
     input(type='hidden', name='crumb', value='#{crumb}')
     button(type='submit') save
 
   form(method='post', action='/add_phone')
-    label(for='phone') add a second phone number to this account
+    label add a second phone number to this account
       input(type='tel', name='phone', value='#{phone}')
     if phone
-      label(for='pin') enter the PIN sent to your secondary phone for validation
+      label enter the PIN sent to your secondary phone for validation
         input(type='text', name='pin')
     input(type='hidden', name='crumb', value='#{crumb}')
     button(type='submit') add

@@ -4,10 +4,16 @@ block content
   h1 my posts
 
   form(method='post', action='/post')
-    label(for='reply') reply links to previous posts? (space delimited)
-      input(type='text', name='reply')
-    label(for='content') content
+    label reply links to previous posts? (space delimited)
+      input#reply-to(type='text', name='reply')
+    label content
       textarea(rows='10', cols='90', name='content', required)
+    label
+      if user.showreplies
+        input(type='checkbox', name='showreplies', checked)
+      else
+        input(type='checkbox', name='showreplies')
+      = 'show replies to this post'
     if error
       p.error= error
     input(type='hidden', name='crumb', value='#{crumb}')
@@ -27,4 +33,6 @@ block content
         a(href='/posts?last=#{lastKey}') older
 
 block scripts
+  script(type='text/javascript', src='/js/query-string.js')
   script(type='text/javascript', src='/js/post.js')
+

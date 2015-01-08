@@ -1,3 +1,4 @@
+/*global io */
 'use strict';
 
 (function () {
@@ -9,9 +10,9 @@
   if (getChatSessionStorage){
     JSON.parse(getChatSessionStorage).forEach( function (data) {
       chatArr.push(data);
-      count ++;
+      count++;
       if (count > 100) {
-        count --;
+        count--;
         chatArr.shift();
       }
     });

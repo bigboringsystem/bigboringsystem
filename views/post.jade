@@ -7,12 +7,29 @@ block content
       input(type='hidden', name='crumb', value='#{crumb}')
       button(type='submit') x delete
   h1
-    a(href='/user/#{post.uid}')= post.name
+    a(href='/user/#{post.uid}')!= post.name
   article
     time= post.created
+
     if post.reply
       p.reply in reply to:&#xa0;
         != post.reply
+
     pre!= post.content
+    div.reply-to-post
+      a(href='/posts?reply_to=#{id}') Reply to this post
+
+    if post.replies && post.replies.length
+      p.reply replies:
+      for reply in post.replies
+        if session && (session === post.uid || op)
+          form(method='POST', action='/reply/replyto!#{reply.target}!#{reply.postid}' class='moderate')
+            input(type='hidden', name='uid', value='#{post.uid}')
+            input(type='hidden', name='crumb', value='#{crumb}')
+            button(type='submit') X
+        a(href='/post/post!#{reply.postid}')= reply.created
+        = ' - '
+        a(href='/user/#{reply.uid}')= reply.name
+        br
 
 block login

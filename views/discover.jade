@@ -10,7 +10,7 @@ block content
           a(href='/post/post!#{post.value.postid}')= post.value.created
         p.posted
           | posted by&#xa0;
-          a(href='/user/#{post.value.uid}')= post.value.name
+          a(href='/user/#{post.value.uid}')!= post.value.name
         if post.value.reply
           p.reply in reply to:&#xa0;
             != post.value.reply
