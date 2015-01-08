@@ -41,7 +41,7 @@ html
               else
                 p Enter your number without spaces or dashes
                 p * including your international dialing prefix
-              input(type='tel', name='phone', required, placeholder='+17895551234', title='+1 is the international dialing prefix for U.S. and Canadian numbers', pattern="^[\\+]?\\d{10,15}$")
+              input(type='tel', name='phone', required, placeholder='+18085551212', title='+1 is the international dialing prefix for U.S. and Canadian numbers', pattern="^[\\+]?\\d{8,14}$")
               if error
                 p.error= error
               input(type='hidden', name='crumb', value='#{crumb}')
