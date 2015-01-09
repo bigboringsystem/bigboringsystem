@@ -22,8 +22,8 @@ block content
   #posts
     for post in posts
       article
-        time
-          a(href='/post/post!#{post.value.postid}')= post.value.created
+        a(href='/post/post!#{post.value.postid}')
+          time(datetime='#{post.value.created}')= post.value.created
         if post.value.reply
           p.reply in reply to:&#xa0;
             != post.value.reply

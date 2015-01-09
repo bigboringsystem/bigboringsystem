@@ -6,8 +6,8 @@ block content
   #posts
     for post in posts
       article
-        time
-          a(href='/post/post!#{post.value.postid}')= post.value.created
+        a(href='/post/post!#{post.value.postid}')
+          time(datetime='#{post.value.created}')= post.value.created
         p.posted
           | posted by&#xa0;
           a(href='/user/#{post.value.uid}')!= post.value.name

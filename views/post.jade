@@ -9,7 +9,7 @@ block content
   h1
     a(href='/user/#{post.uid}')!= post.name
   article
-    time= post.created
+    time(datetime='#{post.created}')= post.created
 
     if post.reply
       p.reply in reply to:&#xa0;
