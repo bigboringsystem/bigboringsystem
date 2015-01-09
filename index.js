@@ -88,6 +88,11 @@ var routes = [
   },
   {
     method: 'GET',
+    path: '/rss',
+    handler: posts.getRss
+  },
+  {
+    method: 'GET',
     path: '/login',
     handler: services.home
   },
