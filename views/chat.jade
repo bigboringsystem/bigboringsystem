@@ -7,8 +7,12 @@ block content
 
   #chat
 
+
+
   form(method='post', id='chat-form')
     input(type='text', id='message', name='message', autocomplete='off' autofocus)
+    #character-count
+      span#counter 200
     button(type='submit', id='send-message') Send
 
 block footer

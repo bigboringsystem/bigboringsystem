@@ -85,6 +85,12 @@
     }
   };
 
+  var chatMessageCounter = function ( value ){
+    var maxMessageLength = 200;
+    var counter = document.getElementById('counter');
+    counter.innerHTML = (maxMessageLength - value).toString();
+  };
+
   getUserData();
 
   if (getChatSessionStorage) {
@@ -98,6 +104,10 @@
     var message = document.querySelector('#message');
     socket.emit('message', message.value);
     message.value = '';
+  };
+
+  document.getElementById('message').onkeyup = function ( ) {
+    chatMessageCounter(this.value.length);
   };
 
   document.getElementById('message').onkeydown = function (event) {
