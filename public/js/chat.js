@@ -43,8 +43,9 @@
         time = '[' + hours + ':' + minutes + ':' + seconds + '] ';
       }
 
-      // highlight a username's own name in any message
       var message = data.message;
+
+      // highlight a username's own name in any message
       if (name) {
         /* Match names that are surrounded on either side by either the
            beginning of the line, whitespace, or the end of a line. Colons
@@ -56,7 +57,7 @@
         message = message.replace(regexName, '<span class=\"highlight\">$&</span>');
       }
 
-      p.innerHTML = '<span class="timestamp">' + (time ? time : '') + '</span>' + '<strong>' + data.name + '</strong>' + ': ' + message;
+      p.innerHTML = '<span class="timestamp">' + (time ? time : '') + '</span>' + (data.name ? '<strong>' + data.name + '</strong>: ' : '') + message;
 
       var shouldScroll = (chatEl.scrollHeight - chatEl.scrollTop === chatEl.clientHeight);
       chatEl.appendChild(p);
@@ -121,6 +122,16 @@
   };
 
   socket.on('message', function (data) {
+    // name command requires cookie update
+    if (data.updateCookie) {
+      var crumb = document.cookie.match(/crumb=([^\x00-\x20\"\,\;\\\x7F]*)/)[1];
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.open('POST', '/updatecookie', true);
+      xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xmlhttp.send('name=' + name + '&crumb=' + crumb);
+    }
+
     setChatMessage(data);
   });
 

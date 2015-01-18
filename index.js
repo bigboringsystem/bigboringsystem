@@ -13,6 +13,7 @@ var services = require('./lib/services');
 var profile = require('./lib/profile');
 var auth = require('./lib/auth');
 var mute = require('./lib/mute');
+var chat = require('./lib/chat');
 
 var posts = require('./lib/posts');
 var utils = require('./lib/utils');
@@ -254,6 +255,18 @@ var routes = [
     method: 'POST',
     path: '/unmute',
     handler: mute.unset
+  },
+  {
+    method: 'POST',
+    path: '/updatecookie',
+    handler: utils.updateCookie,
+    config: {
+      validate: {
+        payload: {
+          name: Joi.string().min(2).max(30)
+        }
+      }
+    }
   }
 ];
 
@@ -426,16 +439,47 @@ server.start(function (err) {
 
       socket.on('message', function (data) {
         var messageLength = data.trim().length;
+
         if (socket.user && messageLength > 0 && messageLength < 251) {
-          io.emit('message', {
+          var message = {
             name: socket.user,
             uid: socket.uid,
             timestamp: (new Date()).toISOString(),
             message: utils.autoLink(data, {
               htmlEscapeNonEntities: true,
               targetBlank: true
-            })
-          });
+            }),
+            updateCookie: false
+          };
+
+          if (data.substr(0, 1) === '/') {
+            chat.commands(socket, data, function (result) {
+              // if command errors or doesnt require output
+              if (!result.message) return;
+
+              // name command settings
+              if (result.name) {
+                socket.user = chatUsers[socket.uid] = result.name;
+                message.updateCookie = true;
+
+                io.emit('users', chatUsers);
+                socket.emit('name', result.name);
+              }
+
+              // do not append user's name to message
+              message.name = false;
+              message.message = result.message;
+
+              if (result.private) {
+                // only send msg to source
+                return socket.emit('message', message);
+              }
+
+              io.emit('message', message);
+            });
+          } else {
+            io.emit('message', message);
+          }
         }
       });
     } catch (err) { }
