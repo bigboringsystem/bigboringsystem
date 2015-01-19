@@ -1,0 +1,49 @@
+/*====================================================================
+----------------------------------------------------------------------
+*
+*  Containers
+*
+----------------------------------------------------------------------
+====================================================================*/
+
+.wrapper
+  font-size: 1rem
+  min-width: 280px
+  position: relative
+  z-index: 2
+
+.content
+  float: left
+  margin-left: 130px
+  margin-top: -1 * $double_spacing_unit
+  max-width: 408px
+
+.content article p
+  margin-bottom: $base_spacing_unit
+
+.footer
+  border-top: 1px solid #eee
+  float: left
+  margin: 25px 0
+  padding-top: $base_spacing_unit
+  width: 100%
+
+.back
+  bottom: 0
+  left: 160px
+  top: 0
+  position: fixed
+  width: 120px
+  border-left: 1px solid $primary_action_color
+  background-color: rgba(255, 255, 255, 0.45)
+  border-right: 2px solid rgba(255, 255, 255, 0.95)
+  z-index: 1
+
+@media only screen and (max-width: 719px)
+  .content
+    margin-left: 0
+    margin-top: $base_spacing_unit
+    width: 100%
+
+  .back
+    opacity: 0.3

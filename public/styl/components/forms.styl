@@ -1,0 +1,38 @@
+/*====================================================================
+----------------------------------------------------------------------
+*
+*  Forms
+*
+----------------------------------------------------------------------
+====================================================================*/
+
+form
+  max-width: 408px
+  margin-bottom: $double_spacing_unit
+
+label
+  display: block
+  margin: $base_spacing_unit 0 $half_spacing_unit
+  padding-bottom: $half_spacing_unit
+
+input, textarea
+  border: 1px solid $primary_action_color
+  display: block
+  clear: both
+  font: 1rem $default_font_families
+  max-width: 400px
+  min-width: 200px
+  margin-top: 3px
+  padding: 3px
+  width: 100%
+
+textarea
+  resize: vertical
+
+input[type=checkbox]
+  display: inline
+  width: auto
+
+@media only screen and (max-width: 719px)
+  input, textarea
+    width: 95%
