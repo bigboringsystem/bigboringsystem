@@ -7,7 +7,13 @@ block content
     label reply links to previous posts? (space delimited)
       input#reply-to(type='text', name='reply')
     label content
-      textarea(rows='10', cols='90', name='content', required)
+      if maxPostLength > 0
+        textarea(rows='10', cols='90', name='content', required, maxLength='#{maxPostLength}')
+        label
+          span(name='charcount', id='charcount')
+          = ' characters remaining'
+      else
+        textarea(rows='10', cols='90', name='content', required)
     label
       if user.showreplies
         input(type='checkbox', name='showreplies', checked)
