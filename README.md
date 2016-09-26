@@ -1,5 +1,9 @@
 # big boring system
 
+# THIS IS UNMAINTAINED. IT IS TOTALLY BUSTED.
+
+There is a newer version over here (with fewer features but does the job) https://github.com/revolting/bbs
+
 [![Build Status](https://travis-ci.org/bigboringsystem/bigboringsystem.svg)](https://travis-ci.org/bigboringsystem/bigboringsystem) [![Dependency Status](https://david-dm.org/bigboringsystem/bigboringsystem.svg)](https://david-dm.org/bigboringsystem/bigboringsystem)  [![devDependency Status](https://david-dm.org/bigboringsystem/bigboringsystem/dev-status.svg)](https://david-dm.org/bigboringsystem/bigboringsystem#info=devDependencies)
 
 ## Feel like contributing?
