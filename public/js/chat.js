@@ -13,8 +13,17 @@
     if (date > 9) {
       return date;
     }
-
     return '0' + date;
+  };
+
+  var formatTimestamp = function (time) {
+    if (!time) { return ''; }
+    var date = new Date(time);
+    var hours = formatTime(date.getHours());
+    var minutes = formatTime(date.getMinutes());
+    var seconds = formatTime(date.getSeconds());
+    var stamp = '[' + hours + ':' + minutes + ':' + seconds + '] ';
+    return '<span class="timestamp">' + stamp + '</span>';
   };
 
   var htmlDecode = function (s) {
@@ -29,47 +38,73 @@
     return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
   };
 
+  /**
+   * Highlight a user's own name found in any message
+   *
+   * Match names that are surrounded on either side by either the
+   * beginning of the line, whitespace, or the end of a line. Colons
+   * are allowed after the name on account of autocomplete
+   */
+  var highlightUsername = function (message) {
+    if (name) {
+      var regexName = new RegExp('(^|\\s)' + escapeRegExCharacters(htmlDecode(name)) + ':?($|\\s)', 'g');
+      // syntactic sugar to use the matched string as the highlighted name, not the sanitized name
+      return message.replace(regexName, '<span class=\"highlight\">$&</span>');
+    }
+    return message;
+  };
+
+  var slashMe = function (message, data) {
+    if (!/^\/me /.test(message)) { return message; }
+
+    return function () {
+      return formatTimestamp(data.timestamp) + '<em>' + name + ' ' + message.substr(4) + '</em>';
+    };
+  };
+
+  /**
+   * Define functions that take (message, data) and return
+   * a modified message, or instead:
+   *
+   * If you return a function, it will be run to create
+   * the entire chat line, instead of the default template
+   * (see slashMe as an example)
+   *
+   * If you return a falsy value, the original
+   * message will be passed along unmodified
+   */
+  var chatMessageHandlers = [
+    highlightUsername,
+    slashMe
+  ];
+
   var setChatMessage = function (data) {
-    if (!muted[data.uid]) {
-      var p = document.createElement('p');
+    if (muted[data.uid]) { return; }
 
-      var time;
-      if (data.timestamp) {
-        var date = new Date(data.timestamp);
-        var hours = formatTime(date.getHours());
-        var minutes = formatTime(date.getMinutes());
-        var seconds = formatTime(date.getSeconds());
+    var p = document.createElement('p');
+    var message;
 
-        time = '[' + hours + ':' + minutes + ':' + seconds + '] ';
-      }
+    chatMessageHandlers.forEach(function (fn) {
+      message = fn(data.message, data) || data.message;
+    });
 
-      // highlight a username's own name in any message
-      var message = data.message;
-      if (name) {
-        /* Match names that are surrounded on either side by either the
-           beginning of the line, whitespace, or the end of a line. Colons
-           are allowed after the name on account of autocomplete */
+    if (typeof message === 'function') {
+      p.innerHTML = message();
+    } else {
+      p.innerHTML = formatTimestamp(data.timestamp) + '<strong>' + data.name + '</strong>' + ': ' + message;
+    }
 
-        var regexName = new RegExp('(^|\\s)' + escapeRegExCharacters(htmlDecode(name)) + ':?($|\\s)', 'g');
+    var shouldScroll = (chatEl.scrollHeight - chatEl.scrollTop === chatEl.clientHeight);
+    chatEl.appendChild(p);
 
-        // syntactic sugar to use the matched string as the highlighted name, not the sanitized name
-        message = message.replace(regexName, '<span class=\"highlight\">$&</span>');
-      }
+    if (shouldScroll) {
+      p.scrollIntoView();
+    }
+    count++;
 
-      p.innerHTML = '<span class="timestamp">' + (time ? time : '') + '</span>' + '<strong>' + data.name + '</strong>' + ': ' + message;
-
-      var shouldScroll = (chatEl.scrollHeight - chatEl.scrollTop === chatEl.clientHeight);
-      chatEl.appendChild(p);
-
-      if (shouldScroll) {
-        p.scrollIntoView();
-      }
-      count++;
-
-      if (count > 100) {
-        chatEl.removeChild(chatEl.getElementsByTagName('p')[0]);
-        count--;
-      }
+    if (count > 100) {
+      chatEl.removeChild(chatEl.getElementsByTagName('p')[0]);
+      count--;
     }
   };
 
@@ -99,12 +134,6 @@
       }
     }
   };
-
-  if (getChatSessionStorage) {
-    JSON.parse(getChatSessionStorage).forEach(function (data) {
-      setChatMessage(data);
-    });
-  }
 
   document.getElementById('chat-form').onsubmit = function (event) {
     event.preventDefault();
@@ -140,6 +169,11 @@
 
   socket.on('name', function (data) {
     name = data;
+    if (getChatSessionStorage) {
+      JSON.parse(getChatSessionStorage).forEach(function (data) {
+        setChatMessage(data);
+      });
+    }
   });
 
   socket.on('connect', function () {
