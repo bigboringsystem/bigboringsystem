@@ -41,6 +41,12 @@
         var seconds = formatTime(date.getSeconds());
 
         time = '[' + hours + ':' + minutes + ':' + seconds + '] ';
+
+        if (data.message.substr(0, 4) === '/me ') {
+          p.innerHTML = '<span class="timestamp">' + (time ? time : '') + '</span>' + '<strong>' + data.name + '</strong>' + data.message.substr(3);
+        } else {
+          p.innerHTML = '<span class="timestamp">' + (time ? time : '') + '</span>' + '<strong>' + data.name + '</strong>' + ': ' + data.message;
+        }
       }
 
       // highlight a username's own name in any message
