@@ -10,5 +10,6 @@
     "ops": [],
     "db": "./db",
     "phoneSalt": "<make me a random string>",
-    "disableSignups": false
+    "disableSignups": false,
+    "maxPostLength": 5000
 }

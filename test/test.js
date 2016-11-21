@@ -312,6 +312,35 @@ lab.test('create new post with session and name', function (done) {
   });
 });
 
+lab.test('verify that post that is too long is rejected', function (done) {
+  var expectedMaxLength = conf.get('maxPostLength') ? parseInt(conf.get('maxPostLength')) : 0;
+  var options = {
+    method: 'POST',
+    url: 'http://' + HOST + '/post',
+    headers: {
+      cookie: cookieHeader()
+    },
+    payload: {
+      reply: '',
+      content: (new Array(expectedMaxLength + 2)).join('a'),
+      showreplies: 'on',
+      fuzze: 'some fuzes fore goode measuries'
+    }
+  };
+
+  if (!expectedMaxLength) {
+    //no maxPostLength set, so this test doesn't really matter.
+    done();
+  }
+
+  server.inject(options, function (response) {
+    saveCookies(response);
+    Code.expect(response.statusCode).to.equal(302);
+    Code.expect(response.headers.location).to.equal('/post?err=Post+content+cannot+exceed+' + expectedMaxLength + '+characters');
+    done();
+  });
+});
+
 lab.test('mute a user', function (done) {
   var options = {
     method: 'POST',
