@@ -129,7 +129,7 @@ var routes = [
     config: {
       validate: {
         payload: {
-          phone: Joi.string().regex(/^\+?[0-9]+$/).min(10).max(15).options({
+          phone: Joi.string().options({
             language: {
               label: 'phone number'
             }
