@@ -1,0 +1,78 @@
+/*====================================================================
+----------------------------------------------------------------------
+*
+*  Chat
+*
+----------------------------------------------------------------------
+====================================================================*/
+
+#chat
+  position: fixed
+  background-color: #fff
+  padding: $half_spacing_unit
+  bottom: 35px
+  top: 72px
+  overflow: hidden
+  overflow-y: scroll
+  border: 1px solid $primary_action_color
+  right: 7px
+  left: 290px
+
+#chat p
+  color: #333
+  font-size: 1rem
+  line-height: 1.2rem
+  margin-bottom: 3px
+
+#chat .timestamp
+  color: #aaa
+  font-size: 0.9rem
+
+#chat strong
+  font-weight: bold
+
+#chat-form
+  bottom: 2px
+  position: fixed
+  max-width: 100%
+  margin: 0
+  left: 290px
+  right: 2px
+
+#chat-form button
+  float: right
+  font-size: 1rem
+  margin: 0 $half_spacing_unit 0
+  min-width: 50px
+  width: 13%
+
+#chat-form input
+  float: left
+  margin: 0
+  max-width: 100%
+  padding: 3px
+  width: 82%
+
+#auth
+  position: fixed
+  top: 25px
+  right: 20px
+  z-index: 2
+
+.highlight
+  color: $highlight_color
+  font-weight: bold
+
+@media only screen and (max-width: 719px)
+  #chat
+    left: 5px
+    top: 195px
+
+  #chat-form
+    left: 5px
+
+  #chat-form input
+    width: 75%
+
+  #chat .timestamp
+    font-size: 0.8rem

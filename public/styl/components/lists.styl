@@ -1,0 +1,164 @@
+/*====================================================================
+----------------------------------------------------------------------
+*
+*  Lists
+*
+----------------------------------------------------------------------
+====================================================================*/
+
+ol
+  margin-left: $double_spacing_unit
+  list-style-type: decimal
+  list-style-position: outside
+
+ol li
+  margin-bottom: $base_spacing_unit
+
+
+// TODO(dmacdnld): standardize list styles and add modifiers
+// for variations
+
+/*--------------------------------------------------------------------
+*
+*  Action List
+*
+--------------------------------------------------------------------*/
+
+section ul.actions
+  float: left
+  margin-bottom: $double_spacing_unit
+  width: 140px
+
+section ul.actions li
+  background-color: rgba(255, 255, 255, 0.35)
+  border-left: 1px solid $primary_action_color
+  border-top: 1px solid $primary_action_color
+  border-bottom: 1px solid $primary_action_color
+  margin-bottom: 2px
+  padding: 0 $base_spacing_unit
+  width: 120px
+  height: 29px
+
+section ul.actions li.tips
+  border: 1px solid transparent
+  height: auto
+  padding: 0 5px
+  white-space: normal
+
+section ul.actions li.tips p
+  line-height: 1.1rem
+  padding: 20px 0 0
+
+.actions input
+  min-width: 112px
+  max-width: 112px
+
+.actions button
+  font-size: 1.1rem
+  width: 120px
+
+@media only screen and (max-width: 719px)
+  section ul.actions
+    width: 100%
+    position: absolute
+    left: -19px
+    top: -15px
+
+  section ul.actions li
+    background-color: rgba(255, 255, 255, 0.8)
+    float: left
+    width: 65px
+    text-indent: 5px
+    padding: 0 2px
+    text-align: center
+
+  section ul.actions li.tips
+    display: none
+
+  section ul.actions li a
+    font-size: 0.9rem
+
+
+/*--------------------------------------------------------------------
+*
+*  User List
+*
+--------------------------------------------------------------------*/
+
+#users
+  bottom: 35px
+  left: 160px
+  position: fixed
+  top: 72px
+  width: 121px
+  overflow: auto
+
+#users li
+  border-top: 1px solid $primary_action_color
+  border-bottom: 1px solid $primary_action_color
+  white-space: nowrap
+  overflow: hidden
+  padding: 0 $half_spacing_unit
+  margin-bottom: 2px
+  height: 29px
+
+#users li a
+  display: block
+  font-size: 1rem
+  line-height: 1.7rem
+
+@media only screen and (max-width: 719px)
+  #users
+    bottom: auto
+    position: relative
+    left: -15px
+    top: -5px
+    height: 50px
+    width: 100%
+    overflow-y: scroll
+
+  #users li
+    background-color: rgba(255, 255, 255, 0.8)
+    clear: none
+    float: left
+    border-left: 1px solid $primary_action_color
+    width: 20%
+    height: 22px
+
+  #users li a
+    font-size: 0.9rem
+    line-height: 1.2rem
+
+/*--------------------------------------------------------------------
+*
+*  Website Lists
+*
+--------------------------------------------------------------------*/
+
+.websites
+  margin: $base_spacing_unit 0
+
+.websites li a
+  line-height: 1.4rem
+
+
+/*--------------------------------------------------------------------
+*
+*  Link Lists
+*
+--------------------------------------------------------------------*/
+
+.links li
+  margin-bottom: $base_spacing_unit
+
+.links li a
+  line-height: 1.4rem
+
+.links-users li
+  float: left
+  width: 100px
+  margin-right: $double_spacing_unit
+  overflow: hidden
+  white-space: nowrap
+  text-overflow: ellipsis
+

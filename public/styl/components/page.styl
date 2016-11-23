@@ -1,0 +1,54 @@
+/*====================================================================
+----------------------------------------------------------------------
+*
+*  Page
+*
+----------------------------------------------------------------------
+====================================================================*/
+
+body
+  padding: $double_spacing_unit
+  background-color: #f9f9f9
+  font-family: $default_font_families
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+
+header, section
+  position: relative
+  z-index: 2
+
+header
+  font-size: 1.4rem
+  margin-bottom: $base_spacing_unit
+
+section
+  float: left
+  margin: $double_spacing_unit 0
+
+section li a
+  font-size: 1.1rem
+  line-height: 1.7rem
+
+pre, article p, li
+  white-space: pre-wrap
+  line-height: 1.3rem
+
+article
+  border-top: 1px solid $primary_action_color
+  margin: $base_spacing_unit 0
+  padding: $base_spacing_unit 0
+
+time
+  display: block
+
+article > time
+  color: #aaa
+
+@media only screen and (max-width: 719px)
+  section
+    clear: both
+    width: 100%
+
+  pre, article p, li
+    font-size: 0.9rem
+    line-height: 1.2rem
