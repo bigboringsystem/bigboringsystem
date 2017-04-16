@@ -29,9 +29,9 @@
     "hoek": "^2.11.0",
     "iron": "^2.1.2",
     "jade": "~1.8.1",
-    "joi": "~5.0.2",
+    "joi": "~5.1.0",
     "level": "~0.18.0",
-    "level-ttl": "~2.1.1",
+    "level-ttl": "~2.2.0",
     "nconf": "~0.7.1",
     "rss": "~1.1.1",
     "socket.io": "~1.2.1",
@@ -43,8 +43,8 @@
   "devDependencies": {
     "code": "~1.2.1",
     "csv-parse": "0.0.6",
-    "eslint": "^0.10.2",
-    "lab": "~5.1.1",
+    "eslint": "^0.11.0",
+    "lab": "~5.2.0",
     "nodemon": "~1.2.1",
     "rimraf": "^2.2.8",
     "stylus": "LearnBoost/stylus#7bc13e1b566a9ac2a717a2b6f9cc188855277fdf"
